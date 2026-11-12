@@ -1,0 +1,68 @@
+[
+  {
+    "id": "docs",
+    "title": "ego lite 文档",
+    "url": "https://lite.ego.app/document/",
+    "windowId": 1,
+    "contextId": "个人",
+    "profileName": "个人",
+    "spaceId": 1,
+    "spaceName": "浏览器工具",
+    "candidates": []
+  },
+  {
+    "id": "gh-work",
+    "title": "GitHub · 团队项目",
+    "url": "https://github.com/example/team-project",
+    "windowId": 2,
+    "contextId": "工作",
+    "profileName": "工作",
+    "spaceId": 2,
+    "spaceName": "开发",
+    "candidates": []
+  },
+  {
+    "id": "gh-personal",
+    "title": "GitHub · 开源收藏",
+    "url": "https://github.com/example?tab=stars",
+    "windowId": 3,
+    "contextId": "个人",
+    "profileName": "个人",
+    "spaceId": 3,
+    "spaceName": "灵感",
+    "candidates": []
+  },
+  {
+    "id": "react",
+    "title": "React · 组件参考",
+    "url": "https://react.dev/reference/react",
+    "windowId": 2,
+    "contextId": "工作",
+    "profileName": "工作",
+    "spaceId": 2,
+    "spaceName": "开发",
+    "candidates": []
+  },
+  {
+    "id": "beui",
+    "title": "beUI · Command Palette",
+    "url": "https://beui.dev/components/blocks/command-palette",
+    "windowId": 3,
+    "contextId": "个人",
+    "profileName": "个人",
+    "spaceId": 3,
+    "spaceName": "灵感",
+    "candidates": []
+  },
+  {
+    "id": "glass",
+    "title": "ExpoKit · Glass Search Bar",
+    "url": "https://expokit.in/docs/glass",
+    "windowId": 3,
+    "contextId": "个人",
+    "profileName": "个人",
+    "spaceId": 3,
+    "spaceName": "灵感",
+    "candidates": []
+  }
+]

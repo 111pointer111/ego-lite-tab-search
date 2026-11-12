@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleExecutable</key><string>EgoTabSearch</string>
+<key>CFBundleIdentifier</key><string>local.ego-tab-search</string>
+<key>CFBundleName</key><string>Ego Tab Search</string>
+<key>CFBundleDisplayName</key><string>Ego 标签搜索</string>
+<key>CFBundleVersion</key><string>1</string>
+<key>CFBundleShortVersionString</key><string>1.0.0</string>
+<key>CFBundlePackageType</key><string>APPL</string>
+<key>CFBundleIconFile</key><string>AppIcon.icns</string>
+<key>LSUIElement</key><true/>
+<key>LSMinimumSystemVersion</key><string>13.0</string>
+<key>NSHighResolutionCapable</key><true/>
+</dict></plist>

@@ -1,0 +1,62 @@
+name: macOS build and release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Check syntax and behavior
+        run: |
+          node --check bridge/runtime.mjs
+          node --check bridge/mapping.mjs
+          node --test bridge/*.test.mjs
+          zsh -n build.sh
+          python3 -m py_compile scripts/package-release.py
+          plutil -lint Info.plist
+          swiftc -swift-version 5 -target arm64-apple-macosx13.0 -warnings-as-errors -typecheck Sources/*.swift
+      - name: Build and verify the app
+        run: |
+          zsh build.sh
+          codesign --verify --deep --strict 'Ego Tab Search.app'
+          test -s 'Ego Tab Search.app/Contents/Resources/AppIcon.icns'
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: macos-15
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Verify version and main-branch source
+        run: |
+          test "$GITHUB_REF_NAME" = "v$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' Info.plist)"
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+      - name: Build the DMG and manifest
+        run: |
+          zsh build.sh
+          python3 scripts/package-release.py
+      - name: Publish the verified preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.dmg dist/desktop-release.json dist/SHA256SUMS.txt \
+            --verify-tag --prerelease --title "$GITHUB_REF_NAME · macOS 预览版" --notes-file RELEASE_NOTES.md
